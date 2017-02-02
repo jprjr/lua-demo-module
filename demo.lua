@@ -21,7 +21,7 @@ pcall(function()
   end
 end)
 
-if not demo_hello then -- module not realdy linked, try to find and open dynamically
+if not demo_hello then -- module not already linked, try to find and open dynamically
   local dir_sep, sep, sub
   local gmatch = string.gmatch
   local match = string.match
