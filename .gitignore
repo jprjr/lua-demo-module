@@ -1,0 +1,6 @@
+/main
+/main-static
+*.o
+*.a
+*.so
+*.lua.c

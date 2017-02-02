@@ -3,7 +3,10 @@ local concat = table.concat
 local ok, ffi = pcall(require,'ffi')
 
 if not ok then -- we must be in regular Lua, just use normal C module
-    return require(concat(modname,'.'))
+    local demo_hello = require(concat(modname,'.'))
+    return function()
+      return 'This is using the C API\n' .. demo_hello()
+    end
 end
 
 local demo_hello -- save reference to function
@@ -64,5 +67,5 @@ end
 
 -- now we return the real guts of the module
 return function()
-  return ffi.string(demo_hello())
+  return 'This is using the FFI API\n' .. ffi.string(demo_hello())
 end
