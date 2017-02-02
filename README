@@ -21,6 +21,7 @@ lua main.lua
 luajit main.lua
 luastatic main.lua demo.lua /path/to/liblua.a demo/core.a -I/path/to/lua/include ; ./main
 luastatic main.lua demo.lua /path/to/libluajit.a demo/core.a -I/path/to/luajit/include ; ./main
+```
 
 
 ## LICENSE
