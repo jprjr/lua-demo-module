@@ -9,7 +9,7 @@ if not ok then -- we must be in regular Lua, just use normal C module
     end
 end
 
-local demo_hello -- save reference to function
+local demo_lib -- save reference to library/namespace
 
 ffi.cdef[[
 char* demo_hello(void);
@@ -17,11 +17,11 @@ char* demo_hello(void);
 
 pcall(function()
   if ffi.C.demo_hello then -- we're in a static binary, already linked, etc
-      demo_hello = ffi.C.demo_hello
+      demo_lib = ffi.C
   end
 end)
 
-if not demo_hello then -- module not already linked, try to find and open dynamically
+if not demo_lib then -- module not already linked, try to find and open dynamically
   local dir_sep, sep, sub
   local gmatch = string.gmatch
   local match = string.match
@@ -55,17 +55,14 @@ if not demo_hello then -- module not already linked, try to find and open dynami
      end
   end
 
-  local lib = load_lib()
-  if lib then -- found the library, return the function reference
-    demo_hello = lib.demo_hello
-  end
+  demo_lib = load_lib()
 end
 
-if not demo_hello then
+if not demo_lib then
   return nil,'failed to load module'
 end
 
 -- now we return the real guts of the module
 return function()
-  return 'This is using the FFI API\n' .. ffi.string(demo_hello())
+  return 'This is using the FFI API\n' .. ffi.string(demo_lib.demo_hello())
 end
