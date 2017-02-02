@@ -4,6 +4,12 @@ This is just a silly example lua module written in C, I used this to
 figure out how to create a C module that works in Lua and LuaJIT,
 as well as with Lua/LuaJIT embedded into a C program.
 
+Files:
+
+* demo.c - the module
+* main.c - the app
+* main.lua - the lua app
+
 ## LICENSE
 
 This is in the public domain.
